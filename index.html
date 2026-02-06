@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Miner Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { background-color: #1a1a1a; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
+        .btn { background: #0088cc; border: none; padding: 15px 30px; color: white; border-radius: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Crypto Miner</h1>
+    <p>Halo, <span id="user-name">User</span>!</p>
+    <div id="balance">Saldo: 0 POINT</div>
+    <br>
+    <button class="btn" onclick="minePoint()">⛏️ Mulai Mining</button>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Membuka layar penuh
+
+        // Menampilkan nama user dari data Telegram
+        const user = tg.initDataUnsafe?.user;
+        if (user) {
+            document.getElementById('user-name').innerText = user.first_name;
+        }
+
+        let points = 0;
+        function minePoint() {
+            points += 1;
+            document.getElementById('balance').innerText = `Saldo: ${points} POINT`;
+            
+            // Haptic feedback (getaran di HP)
+            tg.HapticFeedback.impactOccurred('medium');
+        }
+    </script>
+</body>
+</html>
